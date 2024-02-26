@@ -154,6 +154,14 @@ func (api *KrakenAPI) AssetPairs() (*AssetPairsResponse, error) {
 	return resp.(*AssetPairsResponse), nil
 }
 
+func (api *KrakenAPI) AssetPair(pair string) (*AssetPairsResponse, error) {
+	result, err := api.queryPublic("AssetPairs", url.Values{"pair": {pair}}, &AssetPairsResponse{})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*AssetPairsResponse), nil
+}
+
 // Ticker returns the ticker for given comma separated pairs
 func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
 	resp, err := api.queryPublic("Ticker", url.Values{
