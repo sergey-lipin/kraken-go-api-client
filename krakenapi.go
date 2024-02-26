@@ -126,7 +126,7 @@ func (api *KrakenAPI) WithClient(httpClient *http.Client) *KrakenAPI {
 
 // Time returns the server's time
 func (api *KrakenAPI) Time() (*TimeResponse, error) {
-	resp, err := api.queryPublicGet("Time", nil, &TimeResponse{})
+	resp, err := api.queryPublic("Time", nil, &TimeResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func (api *KrakenAPI) Time() (*TimeResponse, error) {
 
 // Assets returns the servers available assets
 func (api *KrakenAPI) Assets() (*AssetsResponse, error) {
-	resp, err := api.queryPublicGet("Assets", nil, &AssetsResponse{})
+	resp, err := api.queryPublic("Assets", nil, &AssetsResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +146,7 @@ func (api *KrakenAPI) Assets() (*AssetsResponse, error) {
 
 // AssetPairs returns the servers available asset pairs
 func (api *KrakenAPI) AssetPairs() (*AssetPairsResponse, error) {
-	resp, err := api.queryPublicGet("AssetPairs", nil, &AssetPairsResponse{})
+	resp, err := api.queryPublic("AssetPairs", nil, &AssetPairsResponse{})
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ func (api *KrakenAPI) AssetPairs() (*AssetPairsResponse, error) {
 
 // Ticker returns the ticker for given comma separated pairs
 func (api *KrakenAPI) Ticker(pairs ...string) (*TickerResponse, error) {
-	resp, err := api.queryPublicGet("Ticker", url.Values{
+	resp, err := api.queryPublic("Ticker", url.Values{
 		"pair": {strings.Join(pairs, ",")},
 	}, &TickerResponse{})
 	if err != nil {
@@ -184,7 +184,7 @@ func (api *KrakenAPI) OHLCWithInterval(pair string, interval string) (*OHLCRespo
 	}
 
 	// Returns a map[string]interface{} as an interface{}
-	interfaceResponse, err := api.queryPublicGet("OHLC", urlValue, nil)
+	interfaceResponse, err := api.queryPublic("OHLC", urlValue, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -251,7 +251,7 @@ func (api *KrakenAPI) Trades(pair string, since int64) (*TradesResponse, error) 
 	if since > 0 {
 		values.Set("since", strconv.FormatInt(since, 10))
 	}
-	resp, err := api.queryPublicGet("Trades", values, nil)
+	resp, err := api.queryPublic("Trades", values, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -393,7 +393,7 @@ func (api *KrakenAPI) ClosedOrders(args map[string]string) (*ClosedOrdersRespons
 // Depth returns the order book for given pair and orders count.
 func (api *KrakenAPI) Depth(pair string, count int) (*OrderBook, error) {
 	dr := DepthResponse{}
-	_, err := api.queryPublicGet("Depth", url.Values{
+	_, err := api.queryPublic("Depth", url.Values{
 		"pair": {pair}, "count": {strconv.Itoa(count)},
 	}, &dr)
 
@@ -569,7 +569,7 @@ func (api *KrakenAPI) Query(method string, data map[string]string) (interface{},
 
 	// Check if method is public or private
 	if isStringInSlice(method, publicMethods) {
-		return api.queryPublicPost(method, values, nil)
+		return api.queryPublic(method, values, nil)
 	} else if isStringInSlice(method, privateMethods) {
 		return api.queryPrivate(method, values, nil)
 	}
@@ -578,14 +578,7 @@ func (api *KrakenAPI) Query(method string, data map[string]string) (interface{},
 }
 
 // Execute a public method query
-func (api *KrakenAPI) queryPublicPost(method string, values url.Values, typ interface{}) (interface{}, error) {
-	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, method)
-	resp, err := api.doPost(url, values, nil, typ)
-
-	return resp, err
-}
-
-func (api *KrakenAPI) queryPublicGet(reqURL string, values url.Values, typ interface{}) (interface{}, error) {
+func (api *KrakenAPI) queryPublic(reqURL string, values url.Values, typ interface{}) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s/public/%s", APIURL, APIVersion, reqURL)
 	return api.doGet(url, values, nil, typ)
 }
