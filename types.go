@@ -9,86 +9,6 @@ import (
 	"time"
 )
 
-// trade pairs constants
-const (
-	ADACAD   = "ADACAD"
-	ADAETH   = "ADAETH"
-	ADAEUR   = "ADAEUR"
-	ADAUSD   = "ADAUSD"
-	ADAXBT   = "ADAXBT"
-	AAVEUSD  = "AAVEUSD"
-	BCHEUR   = "BCHEUR"
-	BCHUSD   = "BCHUSD"
-	BCHXBT   = "BCHXBT"
-	DASHEUR  = "DASHEUR"
-	DASHUSD  = "DASHUSD"
-	DASHXBT  = "DASHXBT"
-	EOSETH   = "EOSETH"
-	EOSEUR   = "EOSEUR"
-	EOSUSD   = "EOSUSD"
-	EOSXBT   = "EOSXBT"
-	GNOETH   = "GNOETH"
-	GNOEUR   = "GNOEUR"
-	GNOUSD   = "GNOUSD"
-	GNOXBT   = "GNOXBT"
-	LINKUSD   = "LINKUSD"
-	LINKXBT   = "LINKXBT"
-	QTUMCAD  = "QTUMCAD"
-	QTUMETH  = "QTUMETH"
-	QTUMEUR  = "QTUMEUR"
-	QTUMUSD  = "QTUMUSD"
-	QTUMXBT  = "QTUMXBT"
-	USDCUSD  = "USDCUSD"
-	USDTZUSD = "USDTZUSD"
-	XBTUSDT  = "XBTUSDT"
-	XETCXETH = "XETCXETH"
-	XETCXXBT = "XETCXXBT"
-	XETCZEUR = "XETCZEUR"
-	XETCZUSD = "XETCZUSD"
-	XETHXXBT = "XETHXXBT"
-	XETHZCAD = "XETHZCAD"
-	XETHZEUR = "XETHZEUR"
-	XETHZGBP = "XETHZGBP"
-	XETHZJPY = "XETHZJPY"
-	XETHZUSD = "XETHZUSD"
-	XICNXETH = "XICNXETH"
-	XICNXXBT = "XICNXXBT"
-	XLTCXXBT = "XLTCXXBT"
-	XLTCZEUR = "XLTCZEUR"
-	XLTCZUSD = "XLTCZUSD"
-	XMLNXETH = "XMLNXETH"
-	XMLNXXBT = "XMLNXXBT"
-	XREPXETH = "XREPXETH"
-	XREPXXBT = "XREPXXBT"
-	XREPZEUR = "XREPZEUR"
-	XREPZUSD = "XREPZUSD"
-	XTZCAD   = "XTZCAD"
-	XTZETH   = "XTZETH"
-	XTZEUR   = "XTZEUR"
-	XTZUSD   = "XTZUSD"
-	XTZXBT   = "XTZXBT"
-	XXBTZCAD = "XXBTZCAD"
-	XXBTZEUR = "XXBTZEUR"
-	XXBTZGBP = "XXBTZGBP"
-	XXBTZJPY = "XXBTZJPY"
-	XXBTZUSD = "XXBTZUSD"
-	XXDGXXBT = "XXDGXXBT"
-	XXLMXXBT = "XXLMXXBT"
-	XXLMZEUR = "XXLMZEUR"
-	XXLMZUSD = "XXLMZUSD"
-	XXMRXXBT = "XXMRXXBT"
-	XXMRZEUR = "XXMRZEUR"
-	XXMRZUSD = "XXMRZUSD"
-	XXRPXXBT = "XXRPXXBT"
-	XXRPZCAD = "XXRPZCAD"
-	XXRPZEUR = "XXRPZEUR"
-	XXRPZJPY = "XXRPZJPY"
-	XXRPZUSD = "XXRPZUSD"
-	XZECXXBT = "XZECXXBT"
-	XZECZEUR = "XZECZEUR"
-	XZECZUSD = "XZECZUSD"
-)
-
 // actions constants
 const (
 	BUY    = "b"
@@ -112,158 +32,36 @@ type TimeResponse struct {
 }
 
 // AssetPairsResponse includes asset pair informations
-type AssetPairsResponse struct {
-	ADACAD   AssetPairInfo
-	AAVEUSD  AssetPairInfo
-	ADAETH   AssetPairInfo
-	ADAEUR   AssetPairInfo
-	ADAUSD   AssetPairInfo
-	ADAXBT   AssetPairInfo
-	BCHEUR   AssetPairInfo
-	BCHUSD   AssetPairInfo
-	BCHXBT   AssetPairInfo
-	DASHEUR  AssetPairInfo
-	DASHUSD  AssetPairInfo
-	DASHXBT  AssetPairInfo
-	EOSETH   AssetPairInfo
-	EOSEUR   AssetPairInfo
-	EOSUSD   AssetPairInfo
-	EOSXBT   AssetPairInfo
-	GNOETH   AssetPairInfo
-	GNOEUR   AssetPairInfo
-	GNOUSD   AssetPairInfo
-	GNOXBT   AssetPairInfo
-	LINKUSD  AssetPairInfo
-	LINKXBT  AssetPairInfo
-	QTUMCAD  AssetPairInfo
-	QTUMETH  AssetPairInfo
-	QTUMEUR  AssetPairInfo
-	QTUMUSD  AssetPairInfo
-	QTUMXBT  AssetPairInfo
-	USDCUSD  AssetPairInfo
-	USDTZUSD AssetPairInfo
-	XETCXETH AssetPairInfo
-	XETCXXBT AssetPairInfo
-	XETCZEUR AssetPairInfo
-	XETCZUSD AssetPairInfo
-	XETHXXBT AssetPairInfo
-	XETHZCAD AssetPairInfo
-	XETHZEUR AssetPairInfo
-	XETHZGBP AssetPairInfo
-	XETHZJPY AssetPairInfo
-	XETHZUSD AssetPairInfo
-	XICNXETH AssetPairInfo
-	XICNXXBT AssetPairInfo
-	XLTCXXBT AssetPairInfo
-	XLTCZEUR AssetPairInfo
-	XLTCZUSD AssetPairInfo
-	XMLNXETH AssetPairInfo
-	XMLNXXBT AssetPairInfo
-	XREPXETH AssetPairInfo
-	XREPXXBT AssetPairInfo
-	XREPZEUR AssetPairInfo
-	XREPZUSD AssetPairInfo
-	XTZCAD   AssetPairInfo
-	XTZETH   AssetPairInfo
-	XTZEUR   AssetPairInfo
-	XTZUSD   AssetPairInfo
-	XTZXBT   AssetPairInfo
-	XXBTZCAD AssetPairInfo
-	XXBTZEUR AssetPairInfo
-	XXBTZGBP AssetPairInfo
-	XXBTZJPY AssetPairInfo
-	XXBTZUSD AssetPairInfo
-	XXDGXXBT AssetPairInfo
-	XXLMXXBT AssetPairInfo
-	XXLMZEUR AssetPairInfo
-	XXLMZUSD AssetPairInfo
-	XXMRXXBT AssetPairInfo
-	XXMRZEUR AssetPairInfo
-	XXMRZUSD AssetPairInfo
-	XXRPXXBT AssetPairInfo
-	XXRPZCAD AssetPairInfo
-	XXRPZEUR AssetPairInfo
-	XXRPZJPY AssetPairInfo
-	XXRPZUSD AssetPairInfo
-	XZECXXBT AssetPairInfo
-	XZECZEUR AssetPairInfo
-	XZECZUSD AssetPairInfo
-}
+type AssetPairsResponse map[string]AssetPairInfo
 
 // AssetPairInfo represents asset pair information
 type AssetPairInfo struct {
-	// Alternate pair name
-	Altname string `json:"altname"`
-	// Asset class of base component
-	AssetClassBase string `json:"aclass_base"`
-	// Asset id of base component
-	Base string `json:"base"`
-	// Asset class of quote component
-	AssetClassQuote string `json:"aclass_quote"`
-	// Asset id of quote component
-	Quote string `json:"quote"`
-	// Volume lot size
-	Lot string `json:"lot"`
-	// Scaling decimal places for pair
-	PairDecimals int `json:"pair_decimals"`
-	// Scaling decimal places for volume
-	LotDecimals int `json:"lot_decimals"`
-	// Amount to multiply lot volume by to get currency volume
-	LotMultiplier int `json:"lot_multiplier"`
-	// Array of leverage amounts available when buying
-	LeverageBuy []float64 `json:"leverage_buy"`
-	// Array of leverage amounts available when selling
-	LeverageSell []float64 `json:"leverage_sell"`
-	// Fee schedule array in [volume, percent fee] tuples
-	Fees [][]float64 `json:"fees"`
-	// // Maker fee schedule array in [volume, percent fee] tuples (if on maker/taker)
-	FeesMaker [][]float64 `json:"fees_maker"`
-	// // Volume discount currency
-	FeeVolumeCurrency string `json:"fee_volume_currency"`
-	// Margin call level
-	MarginCall int `json:"margin_call"`
-	// Stop-out/Liquidation margin level
-	MarginStop int `json:"margin_stop"`
-	// Order minimum
-	OrderMin float64 `json:"ordermin"`
+	Altname            string      `json:"altname"`              // Alternate pair name
+	AssetClassBase     string      `json:"aclass_base"`          // Asset class of base component
+	Base               string      `json:"base"`                 // Asset ID of base component
+	AssetClassQuote    string      `json:"aclass_quote"`         // Asset class of quote component
+	Quote              string      `json:"quote"`                // Asset ID of quote component
+	PairDecimals       int         `json:"pair_decimals"`        // Scaling decimal places for pair
+	CostDecimals       int         `json:"cost_decimals"`        // Scaling decimal places for cost
+	LotDecimals        int         `json:"lot_decimals"`         // Scaling decimal places for volume
+	LotMultiplier      int         `json:"lot_multiplier"`       // Amount to multiply lot volume by to get currency volume
+	LeverageBuy        []float64   `json:"leverage_buy"`         // Array of leverage amounts available when buying
+	LeverageSell       []float64   `json:"leverage_sell"`        // Array of leverage amounts available when selling
+	Fees               [][]float64 `json:"fees"`                 // Fee schedule array in [<volume>, <percent fee>] tuples
+	FeesMaker          [][]float64 `json:"fees_maker"`           // Maker fee schedule array in [<volume>, <percent fee>] tuples (if on maker/taker)
+	FeeVolumeCurrency  string      `json:"fee_volume_currency"`  // Volume discount currency
+	MarginCall         int         `json:"margin_call"`          // Margin call level
+	MarginStop         int         `json:"margin_stop"`          // Stop-out/liquidation margin level
+	OrderMin           string      `json:"ordermin"`             // Minimum order size (in terms of base currency)
+	CostMin            string      `json:"costmin"`              // Minimum order cost (in terms of quote currency)
+	TickSize           string      `json:"tick_size"`            // Minimum increment between valid price levels
+	Status             string      `json:"status"`               // Status of asset. Possible values: online, cancel_only, post_only, limit_only, reduce_only.
+	LongPositionLimit  int         `json:"long_position_limit"`  // Maximum long margin position size (in terms of base currency)
+	ShortPositionLimit int         `json:"short_position_limit"` // Maximum short margin position size (in terms of base currency)
 }
 
 // AssetsResponse includes asset informations
-type AssetsResponse struct {
-	ADA  AssetInfo
-	AAVE AssetInfo
-	BCH  AssetInfo
-	DASH AssetInfo
-	EOS  AssetInfo
-	GNO  AssetInfo
-	KFEE AssetInfo
-	LINK AssetInfo
-	QTUM AssetInfo
-	USDC AssetInfo
-	USDT AssetInfo
-	XDAO AssetInfo
-	XETC AssetInfo
-	XETH AssetInfo
-	XICN AssetInfo
-	XLTC AssetInfo
-	XMLN AssetInfo
-	XNMC AssetInfo
-	XREP AssetInfo
-	XXBT AssetInfo
-	XXDG AssetInfo
-	XXLM AssetInfo
-	XXMR AssetInfo
-	XXRP AssetInfo
-	XTZ  AssetInfo
-	XXVN AssetInfo
-	XZEC AssetInfo
-	ZCAD AssetInfo
-	ZEUR AssetInfo
-	ZGBP AssetInfo
-	ZJPY AssetInfo
-	ZKRW AssetInfo
-	ZUSD AssetInfo
-}
+type AssetsResponse map[string]AssetInfo
 
 // AssetInfo represents an asset information
 type AssetInfo struct {
@@ -278,42 +76,7 @@ type AssetInfo struct {
 }
 
 // BalanceResponse represents the account's balances (list of currencies)
-type BalanceResponse struct {
-	ADA  float64 `json:"ADA,string"`
-	AAVE float64 `json:"AAVE,string"`
-	BCH  float64 `json:"BCH,string"`
-	DASH float64 `json:"DASH,string"`
-	EOS  float64 `json:"EOS,string"`
-	GNO  float64 `json:"GNO,string"`
-	QTUM float64 `json:"QTUM,string"`
-	KFEE float64 `json:"KFEE,string"`
-	LINK float64 `json:"LINK,string"`
-	USDC float64 `json:"USDC,string"`
-	USDT float64 `json:"USDT,string"`
-	XDAO float64 `json:"XDAO,string"`
-	XETC float64 `json:"XETC,string"`
-	XETH float64 `json:"XETH,string"`
-	XICN float64 `json:"XICN,string"`
-	XLTC float64 `json:"XLTC,string"`
-	XMLN float64 `json:"XMLN,string"`
-	XNMC float64 `json:"XNMC,string"`
-	XREP float64 `json:"XREP,string"`
-	XXBT float64 `json:"XXBT,string"`
-	XXDG float64 `json:"XXDG,string"`
-	XXLM float64 `json:"XXLM,string"`
-	XXMR float64 `json:"XXMR,string"`
-	XXRP float64 `json:"XXRP,string"`
-	XTZ  float64 `json:"XTZ,string"`
-	XXVN float64 `json:"XXVN,string"`
-	XZEC float64 `json:"XZEC,string"`
-	ZCAD float64 `json:"ZCAD,string"`
-	ZEUR float64 `json:"ZEUR,string"`
-	ZGBP float64 `json:"ZGBP,string"`
-	ZJPY float64 `json:"ZJPY,string"`
-	ZKRW float64 `json:"ZKRW,string"`
-	ZUSD float64 `json:"ZUSD,string"`
-	TRX  float64 `json:"TRX,string"`
-}
+type BalanceResponse map[string]string
 
 // TradeBalanceResponse struct used as the response for the TradeBalance method
 type TradeBalanceResponse struct {
@@ -329,83 +92,7 @@ type TradeBalanceResponse struct {
 }
 
 // Fees includes fees information for different currencies
-type Fees struct {
-	ADACAD   FeeInfo
-	ADAETH   FeeInfo
-	ADAEUR   FeeInfo
-	ADAUSD   FeeInfo
-	ADAXBT   FeeInfo
-	AAVEUSD  FeeInfo
-	BCHEUR   FeeInfo
-	BCHUSD   FeeInfo
-	BCHXBT   FeeInfo
-	DASHEUR  FeeInfo
-	DASHUSD  FeeInfo
-	DASHXBT  FeeInfo
-	EOSETH   FeeInfo
-	EOSEUR   FeeInfo
-	EOSUSD   FeeInfo
-	EOSXBT   FeeInfo
-	GNOETH   FeeInfo
-	GNOEUR   FeeInfo
-	GNOUSD   FeeInfo
-	GNOXBT   FeeInfo
-	LINKUSD  FeeInfo
-	LINKXBT  FeeInfo
-	QTUMCAD  FeeInfo
-	QTUMETH  FeeInfo
-	QTUMEUR  FeeInfo
-	QTUMUSD  FeeInfo
-	QTUMXBT  FeeInfo
-	USDCUSD  FeeInfo
-	USDTZUSD FeeInfo
-	XETCXETH FeeInfo
-	XETCXXBT FeeInfo
-	XETCZEUR FeeInfo
-	XETCZUSD FeeInfo
-	XETHXXBT FeeInfo
-	XETHZCAD FeeInfo
-	XETHZEUR FeeInfo
-	XETHZGBP FeeInfo
-	XETHZJPY FeeInfo
-	XETHZUSD FeeInfo
-	XICNXETH FeeInfo
-	XICNXXBT FeeInfo
-	XLTCXXBT FeeInfo
-	XLTCZEUR FeeInfo
-	XLTCZUSD FeeInfo
-	XMLNXETH FeeInfo
-	XMLNXXBT FeeInfo
-	XREPXETH FeeInfo
-	XREPXXBT FeeInfo
-	XREPZEUR FeeInfo
-	XREPZUSD FeeInfo
-	XTZCAD   FeeInfo
-	XTZETH   FeeInfo
-	XTZEUR   FeeInfo
-	XTZUSD   FeeInfo
-	XTZXBT   FeeInfo
-	XXBTZCAD FeeInfo
-	XXBTZEUR FeeInfo
-	XXBTZGBP FeeInfo
-	XXBTZJPY FeeInfo
-	XXBTZUSD FeeInfo
-	XXDGXXBT FeeInfo
-	XXLMXXBT FeeInfo
-	XXLMZEUR FeeInfo
-	XXLMZUSD FeeInfo
-	XXMRXXBT FeeInfo
-	XXMRZEUR FeeInfo
-	XXMRZUSD FeeInfo
-	XXRPXXBT FeeInfo
-	XXRPZCAD FeeInfo
-	XXRPZEUR FeeInfo
-	XXRPZJPY FeeInfo
-	XXRPZUSD FeeInfo
-	XZECXXBT FeeInfo
-	XZECZEUR FeeInfo
-	XZECZUSD FeeInfo
-}
+type Fees map[string]FeeInfo
 
 // FeeInfo represents a fee information
 type FeeInfo struct {
@@ -426,84 +113,7 @@ type TradeVolumeResponse struct {
 }
 
 // TickerResponse includes the requested ticker pairs
-type TickerResponse struct {
-	ADACAD   PairTickerInfo
-	ADAETH   PairTickerInfo
-	ADAEUR   PairTickerInfo
-	ADAUSD   PairTickerInfo
-	ADAXBT   PairTickerInfo
-	AAVEUSD  PairTickerInfo
-	BCHEUR   PairTickerInfo
-	BCHUSD   PairTickerInfo
-	BCHXBT   PairTickerInfo
-	DASHEUR  PairTickerInfo
-	DASHUSD  PairTickerInfo
-	DASHXBT  PairTickerInfo
-	EOSETH   PairTickerInfo
-	EOSEUR   PairTickerInfo
-	EOSUSD   PairTickerInfo
-	EOSXBT   PairTickerInfo
-	GNOETH   PairTickerInfo
-	GNOEUR   PairTickerInfo
-	GNOUSD   PairTickerInfo
-	GNOXBT   PairTickerInfo
-	LINKUSD  PairTickerInfo
-	LINKXBT  PairTickerInfo
-	QTUMCAD  PairTickerInfo
-	QTUMETH  PairTickerInfo
-	QTUMEUR  PairTickerInfo
-	QTUMUSD  PairTickerInfo
-	QTUMXBT  PairTickerInfo
-	USDCUSD  PairTickerInfo
-	USDTZUSD PairTickerInfo
-	XBTUSDT  PairTickerInfo
-	XETCXETH PairTickerInfo
-	XETCXXBT PairTickerInfo
-	XETCZEUR PairTickerInfo
-	XETCZUSD PairTickerInfo
-	XETHXXBT PairTickerInfo
-	XETHZCAD PairTickerInfo
-	XETHZEUR PairTickerInfo
-	XETHZGBP PairTickerInfo
-	XETHZJPY PairTickerInfo
-	XETHZUSD PairTickerInfo
-	XICNXETH PairTickerInfo
-	XICNXXBT PairTickerInfo
-	XLTCXXBT PairTickerInfo
-	XLTCZEUR PairTickerInfo
-	XLTCZUSD PairTickerInfo
-	XMLNXETH PairTickerInfo
-	XMLNXXBT PairTickerInfo
-	XREPXETH PairTickerInfo
-	XREPXXBT PairTickerInfo
-	XREPZEUR PairTickerInfo
-	XREPZUSD PairTickerInfo
-	XXBTZCAD PairTickerInfo
-	XXBTZEUR PairTickerInfo
-	XXBTZGBP PairTickerInfo
-	XXBTZJPY PairTickerInfo
-	XXBTZUSD PairTickerInfo
-	XXDGXXBT PairTickerInfo
-	XXLMXXBT PairTickerInfo
-	XXLMZEUR PairTickerInfo
-	XXLMZUSD PairTickerInfo
-	XXMRXXBT PairTickerInfo
-	XXMRZEUR PairTickerInfo
-	XXMRZUSD PairTickerInfo
-	XXRPXXBT PairTickerInfo
-	XXRPZCAD PairTickerInfo
-	XXRPZEUR PairTickerInfo
-	XXRPZJPY PairTickerInfo
-	XXRPZUSD PairTickerInfo
-	XTZCAD   PairTickerInfo
-	XTZETH   PairTickerInfo
-	XTZEUR   PairTickerInfo
-	XTZUSD   PairTickerInfo
-	XTZXBT   PairTickerInfo
-	XZECXXBT PairTickerInfo
-	XZECZEUR PairTickerInfo
-	XZECZUSD PairTickerInfo
-}
+type TickerResponse map[string]PairTickerInfo
 
 // DepositAddressesResponse is the response type of a DepositAddresses query to the Kraken API.
 type DepositAddressesResponse []struct {
@@ -630,39 +240,36 @@ const (
 	OTSettlePosition      = "settle-position"
 )
 
-// OrderDescription represents an orders description
+// OrderDescription represents an order description
 type OrderDescription struct {
-	AssetPair      string `json:"pair"`
-	Close          string `json:"close"`
-	Leverage       string `json:"leverage"`
-	Order          string `json:"order"`
-	OrderType      string `json:"ordertype"`
-	PrimaryPrice   string `json:"price"`
-	SecondaryPrice string `json:"price2"`
-	Type           string `json:"type"`
+	Pair      string  `json:"pair"`          // Asset pair
+	Type      string  `json:"type"`          // "buy" or "sell"
+	OrderType string  `json:"ordertype"`     // "market" or "limit" or "stop-loss" or "take-profit" or "stop-loss-limit" or "take-profit-limit" or "trailing-stop" or "trailing-stop-limit" or "settle-position"
+	Price     float64 `json:"price,string"`  // Limit price for "limit" orders. Trigger price for "stop-loss", "stop-loss-limit", "take-profit", "take-profit-limit", "trailing-stop" and "trailing-stop-limit orders"
+	Price2    float64 `json:"price2,string"` // Limit price for "stop-loss-limit", "take-profit-limit" and "trailing-stop-limit orders"
+	Leverage  string  `json:"leverage"`      // Amount of leverage
+	Order     string  `json:"order"`         // Order description
+	Close     string  `json:"close"`         // Conditional close order description (if conditional close set)
 }
 
 // Order represents a single order
 type Order struct {
-	TransactionID  string           `json:"-"`
-	ReferenceID    string           `json:"refid"`
-	UserRef        int              `json:"userref"`
-	Status         string           `json:"status"`
-	OpenTime       float64          `json:"opentm"`
-	StartTime      float64          `json:"starttm"`
-	ExpireTime     float64          `json:"expiretm"`
-	Description    OrderDescription `json:"descr"`
-	Volume         string           `json:"vol"`
-	VolumeExecuted float64          `json:"vol_exec,string"`
-	Cost           float64          `json:"cost,string"`
-	Fee            float64          `json:"fee,string"`
-	Price          float64          `json:"price,string"`
-	StopPrice      float64          `json:"stopprice.string"`
-	LimitPrice     float64          `json:"limitprice,string"`
-	Misc           string           `json:"misc"`
-	OrderFlags     string           `json:"oflags"`
-	CloseTime      float64          `json:"closetm"`
-	Reason         string           `json:"reason"`
+	ReferenceID    string           `json:"refid"`             // Referral order transaction ID that created this order
+	UserRef        int              `json:"userref"`           // User reference id
+	Status         string           `json:"status"`            // "pending" or "open" or "closed" or "canceled" or "expired"
+	OpenTime       float64          `json:"opentm"`            // Unix timestamp of when order was placed
+	StartTime      float64          `json:"starttm"`           // Unix timestamp of order start time (or 0 if not set)
+	ExpireTime     float64          `json:"expiretm"`          // Unix timestamp of order end time (or 0 if not set)
+	Description    OrderDescription `json:"descr"`             // Order description info
+	Volume         float64          `json:"vol,string"`        // Volume of order (base currency)
+	VolumeExecuted float64          `json:"vol_exec,string"`   // Volume executed (base currency)
+	Cost           float64          `json:"cost,string"`       // Total cost (quote currency unless)
+	Fee            float64          `json:"fee,string"`        // Total fee (quote currency)
+	Price          float64          `json:"price,string"`      // Average price (quote currency)
+	StopPrice      float64          `json:"stopprice.string"`  // Stop price (quote currency)
+	LimitPrice     float64          `json:"limitprice,string"` // Triggered limit price (quote currency, when limit based order type triggered)
+	Misc           string           `json:"misc"`              // Comma delimited list of miscellaneous info
+	OrderFlags     string           `json:"oflags"`            // Comma delimited list of order flags
 }
 
 // ClosedOrdersResponse represents a list of closed orders, indexed by id
@@ -714,14 +321,15 @@ type OrderBook struct {
 
 // OpenOrdersResponse response when opening an order
 type OpenOrdersResponse struct {
-	Open  map[string]Order `json:"open"`
-	Count int              `json:"count"`
+	Open map[string]Order `json:"open"`
 }
 
 // AddOrderResponse response when adding an order
 type AddOrderResponse struct {
-	Description    OrderDescription `json:"descr"`
-	TransactionIds []string         `json:"txid"`
+	Description struct {
+		Order string `json:"order"`
+	} `json:"descr"`
+	TxId []string `json:"txid"`
 }
 
 // CancelOrderResponse response when cancelling and order
