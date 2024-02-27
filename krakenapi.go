@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"math/big"
 	"mime"
 	"net/http"
@@ -650,7 +650,7 @@ func (api *KrakenAPI) doAPIRequest(req *http.Request, headers map[string]string,
 	defer resp.Body.Close()
 
 	// Read request
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Could not execute request! #3 (%s)", err.Error())
 	}
