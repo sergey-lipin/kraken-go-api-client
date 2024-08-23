@@ -65,8 +65,10 @@ var privateMethods = []string{
 	"TradeVolume",
 	"WalletTransfer",
 	"Withdraw",
+	"WithdrawAddresses",
 	"WithdrawCancel",
 	"WithdrawInfo",
+	"WithdrawMethods",
 	"WithdrawStatus",
 }
 
