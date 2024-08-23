@@ -1,7 +1,7 @@
 Kraken GO API Client
 ====================
 
-[![build status](https://img.shields.io/travis/beldur/kraken-go-api-client/master.svg)](https://travis-ci.org/beldur/kraken-go-api-client)
+Forked from [svanas/kraken-go-api-client](https://github.com/svanas/kraken-go-api-client)
 
 A simple API Client for the [Kraken](https://www.kraken.com/ "Kraken") Trading platform.
 
@@ -14,7 +14,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/beldur/kraken-go-api-client"
+	"github.com/sergey-lipin/kraken-go-api-client"
 )
 
 func main() {
