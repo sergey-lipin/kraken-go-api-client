@@ -1,3 +1,3 @@
-module github.com/svanas/kraken-go-api-client
+module github.com/sergey-lipin/kraken-go-api-client
 
 go 1.19
